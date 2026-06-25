@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,6 +65,35 @@
       transition: color 0.18s;
     }
     .nav-links a:hover { color: var(--text); }
+
+    /* Language Switcher */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      padding: 4px;
+      cursor: pointer;
+    }
+
+    .lang-btn {
+      font-size: 18px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #111;
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.2);
+    }
 
     /* ── HERO ── */
     .hero {
@@ -264,22 +293,30 @@
 
 <nav>
   <a class="nav-brand" href="#">⚔ RO Servers</a>
-  <ul class="nav-links">
-    <li><a href="#available">Available</a></li>
-    <li><a href="#development">In Development</a></li>
-  </ul>
+  
+  <div style="display: flex; align-items: center; gap: 2rem;">
+    <ul class="nav-links">
+      <li><a href="#available" id="nav-available">Available</a></li>
+      <li><a href="#development" id="nav-development">In Development</a></li>
+    </ul>
+    
+    <div class="lang-switcher" id="lang-switcher">
+      <div class="lang-btn active" data-lang="en" title="English">🇺🇸</div>
+      <div class="lang-btn" data-lang="pt" title="Português">🇧🇷</div>
+    </div>
+  </div>
 </nav>
 
 <header class="hero">
-  <p class="hero-eyebrow">Ragnarok Online · Community Servers</p>
-  <h1>Find Your Server</h1>
-  <p>A curated list of active and upcoming Ragnarok Online private servers, handpicked from the community.</p>
+  <p class="hero-eyebrow" id="hero-eyebrow">Ragnarok Online · Community Servers</p>
+  <h1 id="hero-title">Find Your Server</h1>
+  <p id="hero-desc">A curated list of active and upcoming Ragnarok Online private servers, handpicked from the community.</p>
 </header>
 
 <section id="available">
   <div class="section-header">
-    <h2>You Can Play Right Now</h2>
-    <span class="badge badge-online">Online</span>
+    <h2 id="section-available">You Can Play Right Now</h2>
+    <span class="badge badge-online" id="badge-online">Online</span>
   </div>
   <div class="grid" id="grid-available"></div>
 </section>
@@ -288,29 +325,60 @@
 
 <section id="development">
   <div class="section-header">
-    <h2>In Development</h2>
-    <span class="badge badge-dev">Coming Soon</span>
+    <h2 id="section-development">In Development</h2>
+    <span class="badge badge-dev" id="badge-dev">Coming Soon</span>
   </div>
   <div class="grid" id="grid-dev"></div>
 </section>
 
-<footer>
+<footer id="footer-text">
   Updated manually &nbsp;·&nbsp; Not affiliated with any server &nbsp;·&nbsp; Community resource
 </footer>
 
 <script>
-// ── SERVER DATA ──────────────────────────────────────────────────────────────
-// To add/edit a server: just update the objects below.
-// Fields: name, description, rates (string or null), site (url or null),
-//         discord (url or null), youtube (video ID string or null)
-// ────────────────────────────────────────────────────────────────────────────
+// ── TRANSLATIONS ─────────────────────────────────────────────────────────────
+const translations = {
+  en: {
+    navAvailable: "Available",
+    navDevelopment: "In Development",
+    heroEyebrow: "Ragnarok Online · Community Servers",
+    heroTitle: "Find Your Server",
+    heroDesc: "A curated list of active and upcoming Ragnarok Online private servers, handpicked from the community.",
+    sectionAvailable: "You Can Play Right Now",
+    badgeOnline: "Online",
+    sectionDevelopment: "In Development",
+    badgeDev: "Coming Soon",
+    footer: "Updated manually · Not affiliated with any server · Community resource",
+    linkWebsite: "Website",
+    linkDiscord: "Discord",
+    linkTrailer: "Trailer"
+  },
+  pt: {
+    navAvailable: "Disponíveis",
+    navDevelopment: "Em Desenvolvimento",
+    heroEyebrow: "Ragnarok Online · Servidores da Comunidade",
+    heroTitle: "Encontre Seu Servidor",
+    heroDesc: "Uma lista curada de servidores privados de Ragnarok Online ativos e em breve, selecionados pela comunidade.",
+    sectionAvailable: "Você Pode Jogar Agora",
+    badgeOnline: "Online",
+    sectionDevelopment: "Em Desenvolvimento",
+    badgeDev: "Em Breve",
+    footer: "Atualizado manualmente · Não afiliado a nenhum servidor · Recurso da comunidade",
+    linkWebsite: "Site",
+    linkDiscord: "Discord",
+    linkTrailer: "Trailer"
+  }
+};
 
+// ── SERVER DATA (with Portuguese translations) ───────────────────────────────
 const servers = {
-
   available: [
     {
       name: "Echoes of Morroc",
-      description: "A custom server based on Return to Morroc with its own spin on it — faster progression and content completion.",
+      description: {
+        en: "A custom server based on Return to Morroc with its own spin on it — faster progression and content completion.",
+        pt: "Um servidor customizado baseado em Return to Morroc com sua própria abordagem — progressão mais rápida e conclusão de conteúdo."
+      },
       rates: null,
       site: "https://echoesofmorroc.org/",
       discord: null,
@@ -318,7 +386,10 @@ const servers = {
     },
     {
       name: "TrifectaRO",
-      description: "A rebalanced Renewal server with a thoughtful approach to 4th classes and streamlined progression.",
+      description: {
+        en: "A rebalanced Renewal server with a thoughtful approach to 4th classes and streamlined progression.",
+        pt: "Um servidor Renewal rebalanceado com uma abordagem cuidadosa para as 4ª classes e progressão otimizada."
+      },
       rates: null,
       site: "https://trifectaro.com/",
       discord: null,
@@ -326,7 +397,10 @@ const servers = {
     },
     {
       name: "WarboundRO",
-      description: "A custom client server fully re-done with new graphics and interface, including pre-renewal gameplay.",
+      description: {
+        en: "A custom client server fully re-done with new graphics and interface, including pre-renewal gameplay.",
+        pt: "Um servidor com client customizado totalmente reformulado com novos gráficos e interface, incluindo gameplay pré-renewal."
+      },
       rates: null,
       site: "https://warboundro.com/",
       discord: null,
@@ -334,7 +408,10 @@ const servers = {
     },
     {
       name: "Whispers of the Valkyries",
-      description: "A Renewal server with new skill correlations, revamped post-100 gear and content.",
+      description: {
+        en: "A Renewal server with new skill correlations, revamped post-100 gear and content.",
+        pt: "Um servidor Renewal com novas correlações de skills, equipamentos pós-100 reformulados e novo conteúdo."
+      },
       rates: null,
       site: "https://whispersofthevalkyries.com/",
       discord: null,
@@ -342,7 +419,10 @@ const servers = {
     },
     {
       name: "Divine Ascension RO",
-      description: "A custom server featuring a Sub-class system, a new region, new dungeons and a cinematic main story quest.",
+      description: {
+        en: "A custom server featuring a Sub-class system, a new region, new dungeons and a cinematic main story quest.",
+        pt: "Um servidor customizado com sistema de Sub-classes, nova região, novas dungeons e uma quest principal cinematográfica."
+      },
       rates: null,
       site: "https://mysticprojectro.com/wiki/index.php/Main_Page",
       discord: null,
@@ -350,7 +430,10 @@ const servers = {
     },
     {
       name: "Card Captor RO",
-      description: "A pre-renewal server built around card collecting and seasonal mechanics.",
+      description: {
+        en: "A pre-renewal server built around card collecting and seasonal mechanics.",
+        pt: "Um servidor pré-renewal focado em colecionar cards e mecânicas sazonais."
+      },
       rates: null,
       site: "https://cc-ro.com/",
       discord: null,
@@ -358,7 +441,10 @@ const servers = {
     },
     {
       name: "Runerok",
-      description: "A pre-renewal custom server with new class identities and a Rune system replacing the traditional card system.",
+      description: {
+        en: "A pre-renewal custom server with new class identities and a Rune system replacing the traditional card system.",
+        pt: "Um servidor customizado pré-renewal com novas identidades de classes e sistema de Runas substituindo o sistema tradicional de cards."
+      },
       rates: null,
       site: "https://runerok.com",
       discord: null,
@@ -366,7 +452,10 @@ const servers = {
     },
     {
       name: "Einherjar",
-      description: "A custom pre-renewal server featuring revamped regular classes and new job classes, with its own Rune system and a new continent.",
+      description: {
+        en: "A custom pre-renewal server featuring revamped regular classes and new job classes, with its own Rune system and a new continent.",
+        pt: "Um servidor customizado pré-renewal com classes regulares reformuladas, novas classes de job, sistema de Runas próprio e um novo continente."
+      },
       rates: null,
       site: "http://www.einherjaronline.com/mediawiki/index.php/Main_Page",
       discord: null,
@@ -377,63 +466,91 @@ const servers = {
   development: [
     {
       name: "Return to Morroc: Refuge",
-      description: "A custom server built to improve RO as a whole — new world, new classes, new progression and much more.",
+      description: {
+        en: "A custom server built to improve RO as a whole — new world, new classes, new progression and much more.",
+        pt: "Um servidor customizado feito para melhorar o RO como um todo — novo mundo, novas classes, nova progressão e muito mais."
+      },
       site: null,
       discord: "https://discord.gg/a5P3PFNMhn",
       youtube: null,
     },
     {
       name: "Luna Obscura",
-      description: "A new game built in the Ragnarok engine — a mix of Bloodborne and RO with new classes, combat, progression and a brand new world.",
+      description: {
+        en: "A new game built in the Ragnarok engine — a mix of Bloodborne and RO with new classes, combat, progression and a brand new world.",
+        pt: "Um novo jogo construído no engine do Ragnarok — uma mistura de Bloodborne e RO com novas classes, combate, progressão e um mundo completamente novo."
+      },
       site: "https://wiki.cathedralofblades.com/Main_Page",
       discord: null,
       youtube: null,
     },
+    // ... (outros servidores traduzidos de forma similar)
     {
       name: "NightmareRO",
-      description: "A custom server with new class identities, quest-based unlocks and a Nightmare dungeons system.",
+      description: {
+        en: "A custom server with new class identities, quest-based unlocks and a Nightmare dungeons system.",
+        pt: "Um servidor customizado com novas identidades de classes, desbloqueios baseados em quests e sistema de dungeons Nightmare."
+      },
       site: null,
       discord: "https://discord.gg/hUfZpGM8fX",
       youtube: null,
     },
     {
       name: "The Nine Worlds",
-      description: "A new game built in the Ragnarok engine. Features a Soul system instead of EXP (inspired by soulsborne games), new classes, a new world and rich lore.",
+      description: {
+        en: "A new game built in the Ragnarok engine. Features a Soul system instead of EXP (inspired by soulsborne games), new classes, a new world and rich lore.",
+        pt: "Um novo jogo construído no engine do Ragnarok. Possui sistema de Soul ao invés de EXP (inspirado em jogos soulsborne), novas classes, novo mundo e lore rico."
+      },
       site: "https://the-nine-worlds-ro.gitbook.io/guide",
       discord: null,
       youtube: null,
     },
     {
       name: "Runebreakers",
-      description: "A new game built in the Ragnarok engine with roguelite mechanics, meta-progression and floor-based gameplay.",
+      description: {
+        en: "A new game built in the Ragnarok engine with roguelite mechanics, meta-progression and floor-based gameplay.",
+        pt: "Um novo jogo construído no engine do Ragnarok com mecânicas roguelite, meta-progressão e gameplay por andares."
+      },
       site: "https://runebreak.net/#!index.md",
       discord: null,
       youtube: null,
     },
     {
       name: "Brave Souls",
-      description: "A new game in the RO engine with Genshin-like design, WASD movement, and character unlocking via in-game quests or gacha — a fresh spin on the genre.",
+      description: {
+        en: "A new game in the RO engine with Genshin-like design, WASD movement, and character unlocking via in-game quests or gacha — a fresh spin on the genre.",
+        pt: "Um novo jogo no engine do RO com design inspirado em Genshin, movimento WASD e desbloqueio de personagens via quests ou gacha — uma abordagem fresca no gênero."
+      },
       site: "https://brave-soul-ro.com/#/home",
       discord: null,
       youtube: null,
     },
     {
       name: "Edda Tales",
-      description: "A customized sandbox server with new classes, items, skills, new mobs and bosses with custom behavioral combat.",
+      description: {
+        en: "A customized sandbox server with new classes, items, skills, new mobs and bosses with custom behavioral combat.",
+        pt: "Um servidor sandbox customizado com novas classes, itens, skills, novos mobs e bosses com combate comportamental customizado."
+      },
       site: null,
       discord: "https://discord.gg/rwGfNN3nZA",
       youtube: null,
     },
     {
       name: "Aincrad Legacy RO",
-      description: "A custom Ragnarok server inspired by the MMORPG inside Sword Art Online, featuring classless combat and weapon-type progression.",
+      description: {
+        en: "A custom Ragnarok server inspired by the MMORPG inside Sword Art Online, featuring classless combat and weapon-type progression.",
+        pt: "Um servidor Ragnarok customizado inspirado no MMORPG dentro de Sword Art Online, com combate sem classes e progressão por tipo de arma."
+      },
       site: null,
       discord: "https://discord.gg/gw9bCYbrmV",
       youtube: null,
     },
     {
       name: "Gearsfall",
-      description: "A custom engine server focused on economy-driven world progression and strategic management gameplay.",
+      description: {
+        en: "A custom engine server focused on economy-driven world progression and strategic management gameplay.",
+        pt: "Um servidor com engine customizado focado em progressão mundial baseada em economia e gameplay de gerenciamento estratégico."
+      },
       site: null,
       discord: "https://discord.gg/wmXxjYHrqw",
       youtube: null,
@@ -448,19 +565,59 @@ const ICONS = {
   youtube: `<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`,
 };
 
-// ── RENDER ───────────────────────────────────────────────────────────────────
+// ── LANGUAGE MANAGEMENT ─────────────────────────────────────────────────────
+let currentLang = 'en';
+
+function setLanguage(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  // Update UI texts
+  document.getElementById('nav-available').textContent = translations[lang].navAvailable;
+  document.getElementById('nav-development').textContent = translations[lang].navDevelopment;
+  document.getElementById('hero-eyebrow').textContent = translations[lang].heroEyebrow;
+  document.getElementById('hero-title').textContent = translations[lang].heroTitle;
+  document.getElementById('hero-desc').textContent = translations[lang].heroDesc;
+  document.getElementById('section-available').textContent = translations[lang].sectionAvailable;
+  document.getElementById('badge-online').textContent = translations[lang].badgeOnline;
+  document.getElementById('section-development').textContent = translations[lang].sectionDevelopment;
+  document.getElementById('badge-dev').textContent = translations[lang].badgeDev;
+  document.getElementById('footer-text').innerHTML = translations[lang].footer.replace(/·/g, '&nbsp;·&nbsp;');
+
+  // Rebuild cards
+  rebuildCards();
+}
+
+function rebuildCards() {
+  const gridAvail = document.getElementById('grid-available');
+  const gridDev = document.getElementById('grid-dev');
+  
+  gridAvail.innerHTML = '';
+  gridDev.innerHTML = '';
+
+  servers.available.forEach(s => {
+    gridAvail.appendChild(buildCard(s, false));
+  });
+  servers.development.forEach(s => {
+    gridDev.appendChild(buildCard(s, true));
+  });
+}
+
+// ── RENDER CARD ──────────────────────────────────────────────────────────────
 function buildCard(s, isDev) {
   const card = document.createElement('div');
   card.className = `card${isDev ? ' dev' : ''}`;
 
+  const desc = typeof s.description === 'object' ? s.description[currentLang] : s.description;
+
   let html = `<div class="card-name">${s.name}</div>`;
   if (s.rates) html += `<div class="card-rates">${s.rates}</div>`;
-  html += `<p class="card-desc">${s.description}</p>`;
+  html += `<p class="card-desc">${desc}</p>`;
 
   html += `<div class="card-links">`;
-  if (s.site)    html += `<a class="link-btn site"    href="${s.site}"    target="_blank" rel="noopener">${ICONS.site} Website</a>`;
-  if (s.discord) html += `<a class="link-btn discord" href="${s.discord}" target="_blank" rel="noopener">${ICONS.discord} Discord</a>`;
-  if (s.youtube) html += `<a class="link-btn youtube" href="https://youtu.be/${s.youtube}" target="_blank" rel="noopener">${ICONS.youtube} Trailer</a>`;
+  if (s.site)    html += `<a class="link-btn site"    href="${s.site}"    target="_blank" rel="noopener">${ICONS.site} ${translations[currentLang].linkWebsite}</a>`;
+  if (s.discord) html += `<a class="link-btn discord" href="${s.discord}" target="_blank" rel="noopener">${ICONS.discord} ${translations[currentLang].linkDiscord}</a>`;
+  if (s.youtube) html += `<a class="link-btn youtube" href="https://youtu.be/${s.youtube}" target="_blank" rel="noopener">${ICONS.youtube} ${translations[currentLang].linkTrailer}</a>`;
   html += `</div>`;
 
   if (s.youtube) {
@@ -473,11 +630,23 @@ function buildCard(s, isDev) {
   return card;
 }
 
+// ── INIT ─────────────────────────────────────────────────────────────────────
 const gridAvail = document.getElementById('grid-available');
 const gridDev   = document.getElementById('grid-dev');
 
 servers.available.forEach(s   => gridAvail.appendChild(buildCard(s, false)));
 servers.development.forEach(s => gridDev.appendChild(buildCard(s, true)));
+
+// Language switcher
+document.getElementById('lang-switcher').addEventListener('click', (e) => {
+  const btn = e.target.closest('.lang-btn');
+  if (!btn) return;
+  
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  
+  setLanguage(btn.dataset.lang);
+});
 </script>
 </body>
 </html>
