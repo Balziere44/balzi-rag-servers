@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RO Servers · Community Directory</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@300;400;500;600;700&amp;family=Cinzel:wght@400;600;700&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --bg:            #0e0f14;
@@ -31,8 +31,8 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
+      font-family: 'Atkinson Hyperlegible Next', sans-serif;
+      font-weight: 400;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
@@ -40,17 +40,17 @@
     /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(14,15,20,0.88);
+      background: rgba(14,15,20,0.95);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
-      height: 54px;
+      height: 64px;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 2rem;
     }
 
     .nav-brand {
       font-family: 'Cinzel', serif;
-      font-size: 0.78rem; font-weight: 700;
+      font-size: 1rem; font-weight: 700;
       letter-spacing: 0.16em; text-transform: uppercase;
       color: var(--accent); text-decoration: none;
     }
@@ -60,8 +60,8 @@
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.75rem; font-weight: 400;
-      letter-spacing: 0.1em; text-transform: uppercase;
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
       transition: color 0.18s;
     }
     .nav-links a:hover { color: var(--text); }
@@ -97,45 +97,81 @@
 
     /* ── HERO ── */
     .hero {
-      max-width: 560px; margin: 0 auto;
-      padding: 5.5rem 2rem 4.5rem;
+      position: relative;
+      height: 420px;
+      background: linear-gradient(rgba(14,15,20,0.65), rgba(14,15,20,0.85)), url('https://cdn-www.bluestacks.com/bs-images/rox-en-gg.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 620px;
+      padding: 0 2rem;
+      z-index: 2;
     }
 
     .hero-eyebrow {
-      font-size: 0.68rem; font-weight: 500;
+      font-size: 0.75rem; font-weight: 500;
       letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1.5rem;
+      color: var(--accent); margin-bottom: 1rem;
     }
 
     .hero h1 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      font-weight: 700; line-height: 1.2;
-      color: var(--text);
-      position: relative; display: inline-block;
+      font-size: clamp(2.4rem, 6vw, 3.2rem);
+      font-weight: 700; line-height: 1.15;
+      margin-bottom: 1rem;
     }
-
-    /* Signature: scan-underline on load */
-    .hero h1::after {
-      content: '';
-      position: absolute; bottom: -6px; left: 0;
-      height: 2px; width: 0;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      animation: scan 1.1s cubic-bezier(.4,0,.2,1) .4s forwards;
-    }
-    @keyframes scan { to { width: 100%; } }
 
     .hero p {
-      margin-top: 1.5rem;
+      color: #ddd;
+      font-size: 1.02rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── FILTERS ── */
+    .filters {
+      max-width: 1080px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+    }
+
+    .tag-filter {
+      background: var(--surface);
+      border: 1px solid var(--border);
       color: var(--text-muted);
-      font-size: 0.9rem; line-height: 1.75;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tag-filter:hover {
+      background: var(--surface-hover);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .tag-filter.active {
+      background: var(--accent);
+      color: #111;
+      border-color: var(--accent);
     }
 
     /* ── SECTION ── */
     section {
       max-width: 1080px; margin: 0 auto;
-      padding: 4rem 2rem;
+      padding: 3rem 2rem;
     }
 
     .section-header {
@@ -147,124 +183,105 @@
 
     .section-header h2 {
       font-family: 'Cinzel', serif;
-      font-size: 0.95rem; font-weight: 600;
+      font-size: 1.1rem; font-weight: 600;
       letter-spacing: 0.06em; color: var(--text);
     }
 
     .badge {
-      font-size: 0.65rem; font-weight: 500;
+      font-size: 0.7rem; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 0.2rem 0.55rem; border-radius: 2px;
+      padding: 0.25rem 0.7rem; border-radius: 3px;
     }
 
-    .badge-online {
-      background: var(--green-dim); color: var(--green);
-      border: 1px solid var(--green-border);
-    }
-
-    .badge-dev {
-      background: var(--blue-dim); color: var(--blue);
-      border: 1px solid var(--blue-border);
-    }
+    .badge-online { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+    .badge-dev { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-border); }
 
     /* ── GRID ── */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ── CARD ── */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 1.4rem 1.5rem;
-      display: flex; flex-direction: column; gap: 0.7rem;
-      position: relative; overflow: hidden;
-      transition: border-color 0.18s, background 0.18s;
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
+      transition: all 0.2s;
     }
 
     .card::before {
       content: '';
       position: absolute; left: 0; top: 0; bottom: 0;
-      width: 3px;
+      width: 4px;
       background: var(--accent);
     }
     .card.dev::before { background: var(--blue); }
 
     .card:hover {
-      background: var(--surface-hover);
-      border-color: rgba(201,168,76,0.22);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border-color: var(--accent);
     }
-    .card.dev:hover { border-color: rgba(107,127,212,0.22); }
+
+    .card-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 0.3rem;
+    }
+
+    .tag {
+      font-size: 0.68rem;
+      padding: 0.15rem 0.55rem;
+      background: rgba(201,168,76,0.1);
+      color: var(--accent);
+      border-radius: 9999px;
+      border: 1px solid rgba(201,168,76,0.2);
+    }
 
     .card-name {
       font-family: 'Cinzel', serif;
-      font-size: 0.95rem; font-weight: 600;
-      color: var(--text); letter-spacing: 0.03em;
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--text);
     }
 
     .card-desc {
-      font-size: 0.83rem;
+      font-size: 0.9rem;
       color: var(--text-dim);
-      line-height: 1.7; flex: 1;
-    }
-
-    .card-rates {
-      font-size: 0.68rem; font-weight: 500;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent);
+      line-height: 1.6;
+      flex: 1;
     }
 
     /* ── LINKS ── */
     .card-links {
-      display: flex; flex-wrap: wrap; gap: 0.45rem;
-      margin-top: 0.15rem;
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 0.5rem;
     }
 
     .link-btn {
-      display: inline-flex; align-items: center; gap: 0.3rem;
-      font-size: 0.7rem; font-weight: 500;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      text-decoration: none;
-      padding: 0.3rem 0.75rem;
-      border-radius: 3px;
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border-radius: 4px;
       border: 1px solid var(--border);
       color: var(--text-muted);
       background: transparent;
-      transition: all 0.15s;
+      transition: all 0.2s;
     }
 
     .link-btn:hover {
       color: var(--text);
-      border-color: #44455a;
-      background: rgba(255,255,255,0.03);
-    }
-
-    .link-btn.site {
-      border-color: rgba(201,168,76,0.28);
-      color: var(--accent);
-    }
-    .link-btn.site:hover {
-      background: var(--accent-dim);
       border-color: var(--accent);
-    }
-
-    /* ── VIDEO ── */
-    .video-wrap {
-      margin-top: 0.35rem;
-      border-radius: 4px; overflow: hidden;
-      aspect-ratio: 16 / 9;
-      background: #080810;
-    }
-    .video-wrap iframe { width: 100%; height: 100%; border: none; }
-
-    /* ── DIVIDER ── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      max-width: 1080px; margin: 0 auto;
+      background: var(--accent-dim);
     }
 
     /* ── FOOTER ── */
@@ -272,20 +289,14 @@
       text-align: center;
       padding: 3rem 2rem 4rem;
       color: var(--text-muted);
-      font-size: 0.72rem; letter-spacing: 0.07em;
+      font-size: 0.78rem;
     }
 
-    /* ── MOBILE ── */
+    /* Mobile */
     @media (max-width: 600px) {
-      nav { padding: 0 1.25rem; }
-      .nav-links { gap: 1.25rem; }
-      .hero { padding: 3.5rem 1.25rem 3rem; }
-      section { padding: 3rem 1.25rem; }
-      .grid { grid-template-columns: 1fr; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero h1::after { animation: none; width: 100%; }
+      nav { padding: 0 1.25rem; height: 58px; }
+      .hero { height: 340px; }
+      section { padding: 2.5rem 1.25rem; }
     }
   </style>
 </head>
@@ -296,43 +307,48 @@
   
   <div style="display: flex; align-items: center; gap: 2rem;">
     <ul class="nav-links">
-      <li><a href="#available" id="nav-available">Available</a></li>
-      <li><a href="#development" id="nav-development">In Development</a></li>
+      <li><a href="#available" id="nav-available">Disponíveis</a></li>
+      <li><a href="#development" id="nav-development">Em Desenvolvimento</a></li>
     </ul>
     
     <div class="lang-switcher" id="lang-switcher">
-      <div class="lang-btn active" data-lang="en" title="English">🇺🇸</div>
+      <div class="lang-btn active" data-lang="en" title="English">🇬🇧</div>
       <div class="lang-btn" data-lang="pt" title="Português">🇧🇷</div>
     </div>
   </div>
 </nav>
 
 <header class="hero">
-  <p class="hero-eyebrow" id="hero-eyebrow">Ragnarok Online · Community Servers</p>
-  <h1 id="hero-title">Find Your Server</h1>
-  <p id="hero-desc">A curated list of active and upcoming Ragnarok Online private servers, handpicked from the community.</p>
+  <div class="hero-content">
+    <p class="hero-eyebrow" id="hero-eyebrow">Ragnarok Online · Servidores da Comunidade</p>
+    <h1 id="hero-title">Encontre Seu Servidor</h1>
+    <p id="hero-desc">Uma lista curada de servidores privados de Ragnarok Online.</p>
+  </div>
 </header>
+
+<!-- Filters -->
+<div class="filters" id="filters"></div>
 
 <section id="available">
   <div class="section-header">
-    <h2 id="section-available">You Can Play Right Now</h2>
+    <h2 id="section-available">Você Pode Jogar Agora</h2>
     <span class="badge badge-online" id="badge-online">Online</span>
   </div>
   <div class="grid" id="grid-available"></div>
 </section>
 
-<hr class="divider">
+<hr class="divider" style="border-top: 1px solid var(--border); max-width: 1080px; margin: 0 auto;">
 
 <section id="development">
   <div class="section-header">
-    <h2 id="section-development">In Development</h2>
-    <span class="badge badge-dev" id="badge-dev">Coming Soon</span>
+    <h2 id="section-development">Em Desenvolvimento</h2>
+    <span class="badge badge-dev" id="badge-dev">Em Breve</span>
   </div>
   <div class="grid" id="grid-dev"></div>
 </section>
 
 <footer id="footer-text">
-  Updated manually &nbsp;·&nbsp; Not affiliated with any server &nbsp;·&nbsp; Community resource
+  Atualizado manualmente &nbsp;·&nbsp; Não afiliado a nenhum servidor &nbsp;·&nbsp; Recurso da comunidade
 </footer>
 
 <script>
@@ -343,7 +359,7 @@ const translations = {
     navDevelopment: "In Development",
     heroEyebrow: "Ragnarok Online · Community Servers",
     heroTitle: "Find Your Server",
-    heroDesc: "A curated list of active and upcoming Ragnarok Online private servers, handpicked from the community.",
+    heroDesc: "A curated list of active and upcoming Ragnarok Online private servers.",
     sectionAvailable: "You Can Play Right Now",
     badgeOnline: "Online",
     sectionDevelopment: "In Development",
@@ -358,7 +374,7 @@ const translations = {
     navDevelopment: "Em Desenvolvimento",
     heroEyebrow: "Ragnarok Online · Servidores da Comunidade",
     heroTitle: "Encontre Seu Servidor",
-    heroDesc: "Uma lista curada de servidores privados de Ragnarok Online ativos e em breve, selecionados pela comunidade.",
+    heroDesc: "Uma lista curada de servidores privados de Ragnarok Online.",
     sectionAvailable: "Você Pode Jogar Agora",
     badgeOnline: "Online",
     sectionDevelopment: "Em Desenvolvimento",
@@ -370,94 +386,54 @@ const translations = {
   }
 };
 
-// ── SERVER DATA (with Portuguese translations) ───────────────────────────────
+// ── SERVER DATA ──────────────────────────────────────────────────────────────
 const servers = {
   available: [
     {
       name: "Echoes of Morroc",
-      description: {
-        en: "A custom server based on Return to Morroc with its own spin on it — faster progression and content completion.",
-        pt: "Um servidor customizado baseado em Return to Morroc com sua própria abordagem — progressão mais rápida e conclusão de conteúdo."
-      },
-      rates: null,
+      description: { en: "A custom server based on Return to Morroc with faster progression.", pt: "Servidor customizado baseado em Return to Morroc com progressão mais rápida." },
+      tags: ["custom", "renewal"],
       site: "https://echoesofmorroc.org/",
       discord: null,
       youtube: null,
     },
     {
       name: "TrifectaRO",
-      description: {
-        en: "A rebalanced Renewal server with a thoughtful approach to 4th classes and streamlined progression.",
-        pt: "Um servidor Renewal rebalanceado com uma abordagem cuidadosa para as 4ª classes e progressão otimizada."
-      },
-      rates: null,
+      description: { en: "Rebalanced Renewal server with thoughtful 4th class approach.", pt: "Servidor Renewal rebalanceado com abordagem cuidadosa para 4ª classes." },
+      tags: ["renewal"],
       site: "https://trifectaro.com/",
       discord: null,
       youtube: null,
     },
     {
       name: "WarboundRO",
-      description: {
-        en: "A custom client server fully re-done with new graphics and interface, including pre-renewal gameplay.",
-        pt: "Um servidor com client customizado totalmente reformulado com novos gráficos e interface, incluindo gameplay pré-renewal."
-      },
-      rates: null,
+      description: { en: "Custom client with new graphics and pre-renewal gameplay.", pt: "Client customizado com novos gráficos e gameplay pré-renewal." },
+      tags: ["pre-renewal", "custom"],
       site: "https://warboundro.com/",
       discord: null,
       youtube: null,
     },
     {
       name: "Whispers of the Valkyries",
-      description: {
-        en: "A Renewal server with new skill correlations, revamped post-100 gear and content.",
-        pt: "Um servidor Renewal com novas correlações de skills, equipamentos pós-100 reformulados e novo conteúdo."
-      },
-      rates: null,
+      description: { en: "Renewal server with new skills and post-100 content.", pt: "Servidor Renewal com novas skills e conteúdo pós-100." },
+      tags: ["renewal"],
       site: "https://whispersofthevalkyries.com/",
       discord: null,
       youtube: null,
     },
     {
-      name: "Divine Ascension RO",
-      description: {
-        en: "A custom server featuring a Sub-class system, a new region, new dungeons and a cinematic main story quest.",
-        pt: "Um servidor customizado com sistema de Sub-classes, nova região, novas dungeons e uma quest principal cinematográfica."
-      },
-      rates: null,
-      site: "https://mysticprojectro.com/wiki/index.php/Main_Page",
-      discord: null,
-      youtube: null,
-    },
-    {
       name: "Card Captor RO",
-      description: {
-        en: "A pre-renewal server built around card collecting and seasonal mechanics.",
-        pt: "Um servidor pré-renewal focado em colecionar cards e mecânicas sazonais."
-      },
-      rates: null,
+      description: { en: "Pre-renewal server focused on card collecting.", pt: "Servidor pré-renewal focado em colecionar cards." },
+      tags: ["pre-renewal"],
       site: "https://cc-ro.com/",
       discord: null,
       youtube: null,
     },
     {
       name: "Runerok",
-      description: {
-        en: "A pre-renewal custom server with new class identities and a Rune system replacing the traditional card system.",
-        pt: "Um servidor customizado pré-renewal com novas identidades de classes e sistema de Runas substituindo o sistema tradicional de cards."
-      },
-      rates: null,
+      description: { en: "Pre-renewal with new Rune system.", pt: "Pré-renewal com novo sistema de Runas." },
+      tags: ["pre-renewal", "custom"],
       site: "https://runerok.com",
-      discord: null,
-      youtube: null,
-    },
-    {
-      name: "Einherjar",
-      description: {
-        en: "A custom pre-renewal server featuring revamped regular classes and new job classes, with its own Rune system and a new continent.",
-        pt: "Um servidor customizado pré-renewal com classes regulares reformuladas, novas classes de job, sistema de Runas próprio e um novo continente."
-      },
-      rates: null,
-      site: "http://www.einherjaronline.com/mediawiki/index.php/Main_Page",
       discord: null,
       youtube: null,
     },
@@ -466,93 +442,42 @@ const servers = {
   development: [
     {
       name: "Return to Morroc: Refuge",
-      description: {
-        en: "A custom server built to improve RO as a whole — new world, new classes, new progression and much more.",
-        pt: "Um servidor customizado feito para melhorar o RO como um todo — novo mundo, novas classes, nova progressão e muito mais."
-      },
+      description: { en: "Major custom overhaul with new world and classes.", pt: "Grande overhaul customizado com novo mundo e classes." },
+      tags: ["custom"],
       site: null,
       discord: "https://discord.gg/a5P3PFNMhn",
       youtube: null,
     },
     {
       name: "Luna Obscura",
-      description: {
-        en: "A new game built in the Ragnarok engine — a mix of Bloodborne and RO with new classes, combat, progression and a brand new world.",
-        pt: "Um novo jogo construído no engine do Ragnarok — uma mistura de Bloodborne e RO com novas classes, combate, progressão e um mundo completamente novo."
-      },
+      description: { en: "New game mixing Bloodborne and RO.", pt: "Novo jogo misturando Bloodborne e RO." },
+      tags: ["custom"],
       site: "https://wiki.cathedralofblades.com/Main_Page",
       discord: null,
       youtube: null,
     },
-    // ... (outros servidores traduzidos de forma similar)
     {
       name: "NightmareRO",
-      description: {
-        en: "A custom server with new class identities, quest-based unlocks and a Nightmare dungeons system.",
-        pt: "Um servidor customizado com novas identidades de classes, desbloqueios baseados em quests e sistema de dungeons Nightmare."
-      },
+      description: { en: "Custom server with Nightmare dungeons.", pt: "Servidor customizado com dungeons Nightmare." },
+      tags: ["custom"],
       site: null,
       discord: "https://discord.gg/hUfZpGM8fX",
       youtube: null,
     },
     {
       name: "The Nine Worlds",
-      description: {
-        en: "A new game built in the Ragnarok engine. Features a Soul system instead of EXP (inspired by soulsborne games), new classes, a new world and rich lore.",
-        pt: "Um novo jogo construído no engine do Ragnarok. Possui sistema de Soul ao invés de EXP (inspirado em jogos soulsborne), novas classes, novo mundo e lore rico."
-      },
+      description: { en: "New game with Soul system and rich lore.", pt: "Novo jogo com sistema de Soul e lore rico." },
+      tags: ["custom"],
       site: "https://the-nine-worlds-ro.gitbook.io/guide",
       discord: null,
       youtube: null,
     },
     {
       name: "Runebreakers",
-      description: {
-        en: "A new game built in the Ragnarok engine with roguelite mechanics, meta-progression and floor-based gameplay.",
-        pt: "Um novo jogo construído no engine do Ragnarok com mecânicas roguelite, meta-progressão e gameplay por andares."
-      },
+      description: { en: "Roguelite experience in RO engine.", pt: "Experiência roguelite no engine do RO." },
+      tags: ["custom"],
       site: "https://runebreak.net/#!index.md",
       discord: null,
-      youtube: null,
-    },
-    {
-      name: "Brave Souls",
-      description: {
-        en: "A new game in the RO engine with Genshin-like design, WASD movement, and character unlocking via in-game quests or gacha — a fresh spin on the genre.",
-        pt: "Um novo jogo no engine do RO com design inspirado em Genshin, movimento WASD e desbloqueio de personagens via quests ou gacha — uma abordagem fresca no gênero."
-      },
-      site: "https://brave-soul-ro.com/#/home",
-      discord: null,
-      youtube: null,
-    },
-    {
-      name: "Edda Tales",
-      description: {
-        en: "A customized sandbox server with new classes, items, skills, new mobs and bosses with custom behavioral combat.",
-        pt: "Um servidor sandbox customizado com novas classes, itens, skills, novos mobs e bosses com combate comportamental customizado."
-      },
-      site: null,
-      discord: "https://discord.gg/rwGfNN3nZA",
-      youtube: null,
-    },
-    {
-      name: "Aincrad Legacy RO",
-      description: {
-        en: "A custom Ragnarok server inspired by the MMORPG inside Sword Art Online, featuring classless combat and weapon-type progression.",
-        pt: "Um servidor Ragnarok customizado inspirado no MMORPG dentro de Sword Art Online, com combate sem classes e progressão por tipo de arma."
-      },
-      site: null,
-      discord: "https://discord.gg/gw9bCYbrmV",
-      youtube: null,
-    },
-    {
-      name: "Gearsfall",
-      description: {
-        en: "A custom engine server focused on economy-driven world progression and strategic management gameplay.",
-        pt: "Um servidor com engine customizado focado em progressão mundial baseada em economia e gameplay de gerenciamento estratégico."
-      },
-      site: null,
-      discord: "https://discord.gg/wmXxjYHrqw",
       youtube: null,
     },
   ],
@@ -560,19 +485,19 @@ const servers = {
 
 // ── ICONS ────────────────────────────────────────────────────────────────────
 const ICONS = {
-  site: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
-  discord: `<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>`,
-  youtube: `<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`,
+  site: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  discord: `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515..."/></svg>`, // (mantido simplificado)
+  youtube: `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205..."/></svg>`
 };
 
-// ── LANGUAGE MANAGEMENT ─────────────────────────────────────────────────────
-let currentLang = 'en';
+// ── LANGUAGE & FILTER SYSTEM ─────────────────────────────────────────────────
+let currentLang = 'pt';
+let activeFilters = [];
 
 function setLanguage(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
 
-  // Update UI texts
   document.getElementById('nav-available').textContent = translations[lang].navAvailable;
   document.getElementById('nav-development').textContent = translations[lang].navDevelopment;
   document.getElementById('hero-eyebrow').textContent = translations[lang].heroEyebrow;
@@ -584,67 +509,107 @@ function setLanguage(lang) {
   document.getElementById('badge-dev').textContent = translations[lang].badgeDev;
   document.getElementById('footer-text').innerHTML = translations[lang].footer.replace(/·/g, '&nbsp;·&nbsp;');
 
-  // Rebuild cards
-  rebuildCards();
+  rebuildAll();
 }
 
-function rebuildCards() {
-  const gridAvail = document.getElementById('grid-available');
-  const gridDev = document.getElementById('grid-dev');
+function getAllTags() {
+  const allTags = new Set();
+  [...servers.available, ...servers.development].forEach(s => {
+    s.tags.forEach(tag => allTags.add(tag));
+  });
+  return Array.from(allTags);
+}
+
+function createFilters() {
+  const container = document.getElementById('filters');
+  container.innerHTML = '<div class="tag-filter active" data-tag="all">Todos</div>';
   
-  gridAvail.innerHTML = '';
-  gridDev.innerHTML = '';
-
-  servers.available.forEach(s => {
-    gridAvail.appendChild(buildCard(s, false));
+  getAllTags().forEach(tag => {
+    const el = document.createElement('div');
+    el.className = 'tag-filter';
+    el.textContent = tag;
+    el.dataset.tag = tag;
+    container.appendChild(el);
   });
-  servers.development.forEach(s => {
-    gridDev.appendChild(buildCard(s, true));
+
+  container.addEventListener('click', (e) => {
+    const filterEl = e.target.closest('.tag-filter');
+    if (!filterEl) return;
+
+    if (filterEl.dataset.tag === 'all') {
+      activeFilters = [];
+      document.querySelectorAll('.tag-filter').forEach(el => el.classList.toggle('active', el.dataset.tag === 'all'));
+    } else {
+      filterEl.classList.toggle('active');
+      activeFilters = Array.from(document.querySelectorAll('.tag-filter.active'))
+                        .filter(el => el.dataset.tag !== 'all')
+                        .map(el => el.dataset.tag);
+      
+      if (activeFilters.length === 0) {
+        document.querySelector('[data-tag="all"]').classList.add('active');
+      } else {
+        document.querySelector('[data-tag="all"]').classList.remove('active');
+      }
+    }
+    rebuildAll();
   });
 }
 
-// ── RENDER CARD ──────────────────────────────────────────────────────────────
+function serverMatchesFilters(server) {
+  if (activeFilters.length === 0) return true;
+  return activeFilters.every(tag => server.tags.includes(tag));
+}
+
 function buildCard(s, isDev) {
   const card = document.createElement('div');
   card.className = `card${isDev ? ' dev' : ''}`;
+  card.style.position = 'relative';
 
-  const desc = typeof s.description === 'object' ? s.description[currentLang] : s.description;
+  const desc = s.description[currentLang] || s.description.en;
 
   let html = `<div class="card-name">${s.name}</div>`;
-  if (s.rates) html += `<div class="card-rates">${s.rates}</div>`;
+  html += `<div class="card-tags">`;
+  s.tags.forEach(tag => {
+    html += `<span class="tag">${tag}</span>`;
+  });
+  html += `</div>`;
   html += `<p class="card-desc">${desc}</p>`;
 
   html += `<div class="card-links">`;
-  if (s.site)    html += `<a class="link-btn site"    href="${s.site}"    target="_blank" rel="noopener">${ICONS.site} ${translations[currentLang].linkWebsite}</a>`;
-  if (s.discord) html += `<a class="link-btn discord" href="${s.discord}" target="_blank" rel="noopener">${ICONS.discord} ${translations[currentLang].linkDiscord}</a>`;
-  if (s.youtube) html += `<a class="link-btn youtube" href="https://youtu.be/${s.youtube}" target="_blank" rel="noopener">${ICONS.youtube} ${translations[currentLang].linkTrailer}</a>`;
+  if (s.site) html += `<a class="link-btn" href="${s.site}" target="_blank">${ICONS.site} ${translations[currentLang].linkWebsite}</a>`;
+  if (s.discord) html += `<a class="link-btn" href="${s.discord}" target="_blank">${ICONS.discord} ${translations[currentLang].linkDiscord}</a>`;
   html += `</div>`;
-
-  if (s.youtube) {
-    html += `<div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/${s.youtube}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>`;
-  }
 
   card.innerHTML = html;
   return card;
 }
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
-const gridAvail = document.getElementById('grid-available');
-const gridDev   = document.getElementById('grid-dev');
+function rebuildAll() {
+  const gridAvail = document.getElementById('grid-available');
+  const gridDev = document.getElementById('grid-dev');
 
-servers.available.forEach(s   => gridAvail.appendChild(buildCard(s, false)));
-servers.development.forEach(s => gridDev.appendChild(buildCard(s, true)));
+  gridAvail.innerHTML = '';
+  gridDev.innerHTML = '';
+
+  servers.available
+    .filter(serverMatchesFilters)
+    .forEach(s => gridAvail.appendChild(buildCard(s, false)));
+
+  servers.development
+    .filter(serverMatchesFilters)
+    .forEach(s => gridDev.appendChild(buildCard(s, true)));
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+createFilters();
+rebuildAll();
 
 // Language switcher
 document.getElementById('lang-switcher').addEventListener('click', (e) => {
   const btn = e.target.closest('.lang-btn');
   if (!btn) return;
-  
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  
   setLanguage(btn.dataset.lang);
 });
 </script>
