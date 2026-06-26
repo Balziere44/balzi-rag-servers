@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RO Servers · Community Directory</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..900;1,200..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..900;1,200..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
   <style>
     :root {
       --accent:        #b8922e;
@@ -52,7 +52,7 @@
     }
 
     .nav-brand {
-      font-family: 'Cinzel', serif;
+      font-family: 'Archivo Black', sans-serif;
       font-size: 0.73rem; font-weight: 700;
       letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--accent-light); text-decoration: none;
@@ -112,7 +112,7 @@
       color: var(--accent-light); margin-bottom: 0.6rem;
     }
     .hero h1 {
-      font-family: 'Cinzel', serif;
+      font-family: 'Archivo Black', sans-serif;
       font-size: clamp(1.5rem, 3.5vw, 2.2rem);
       font-weight: 700; line-height: 1.2; color: #fff;
     }
@@ -172,7 +172,7 @@
       border-bottom: 1px solid var(--border);
     }
     .col-header h2 {
-      font-family: 'Cinzel', serif;
+      font-family: 'Archivo Black', sans-serif;
       font-size: 0.82rem; font-weight: 700;
       letter-spacing: 0.07em; color: var(--text);
     }
@@ -219,7 +219,7 @@
     .card.hidden { display: none; }
 
     .card-name {
-      font-family: 'Cinzel', serif;
+      font-family: 'Archivo Black', sans-serif;
       font-size: 0.88rem; font-weight: 600;
       color: var(--text); letter-spacing: 0.02em;
     }
@@ -641,7 +641,7 @@ const ICONS = {
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let currentLang   = 'en';
-let activeTag     = null;   // null = show all
+let activeTags    = new Set(); // empty = show all
 
 // ── BUILD FILTER BAR ─────────────────────────────────────────────────────────
 function getAllTags() {
@@ -661,17 +661,17 @@ function renderFilterBar() {
 
   // "All" pill
   const allBtn = document.createElement('button');
-  allBtn.className = 'tag-filter' + (activeTag === null ? ' active' : '');
+  allBtn.className = 'tag-filter' + (activeTags.size === 0 ? ' active' : '');
   allBtn.textContent = t.filterAll;
-  allBtn.addEventListener('click', () => { activeTag = null; applyFilter(); renderFilterBar(); });
+  allBtn.addEventListener('click', () => { activeTags.clear(); applyFilter(); renderFilterBar(); });
   bar.appendChild(allBtn);
 
   getAllTags().forEach(tag => {
     const btn = document.createElement('button');
-    btn.className = 'tag-filter' + (activeTag === tag ? ' active' : '');
+    btn.className = 'tag-filter' + (activeTags.has(tag) ? ' active' : '');
     btn.textContent = (tagLabels[tag] || {})[lang] || tag;
     btn.addEventListener('click', () => {
-      activeTag = (activeTag === tag) ? null : tag;
+      activeTags.has(tag) ? activeTags.delete(tag) : activeTags.add(tag);
       applyFilter();
       renderFilterBar();
     });
@@ -690,13 +690,13 @@ function applyFilter() {
 
     grid.querySelectorAll('.card').forEach((card, i) => {
       const s       = list[i];
-      const matches = !activeTag || s.tags.includes(activeTag);
+      const matches = activeTags.size === 0 || s.tags.some(t => activeTags.has(t));
       card.classList.toggle('hidden', !matches);
       if (matches) visible++;
 
       // highlight matching tags inside the card
       card.querySelectorAll('.card-tag').forEach(t => {
-        t.classList.toggle('tag-highlighted', activeTag && t.dataset.tag === activeTag);
+        t.classList.toggle('tag-highlighted', activeTags.size > 0 && activeTags.has(t.dataset.tag));
       });
     });
 
@@ -738,7 +738,7 @@ function buildCard(s, isDev) {
   card.querySelectorAll('.card-tag').forEach(btn => {
     btn.addEventListener('click', e => {
       const tag = btn.dataset.tag;
-      activeTag = (activeTag === tag) ? null : tag;
+      activeTags.has(tag) ? activeTags.delete(tag) : activeTags.add(tag);
       applyFilter();
       renderFilterBar();
     });
