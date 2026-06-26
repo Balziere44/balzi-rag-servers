@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RO Servers · Community Directory</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..900;1,200..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..900;1,200..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --accent:        #b8922e;
@@ -94,7 +94,7 @@
     .hero {
       position: relative;
       background: url('https://cdn-www.bluestacks.com/bs-images/rox-en-gg.jpg') center 30% / cover no-repeat;
-      min-height: 280px;
+      min-height: 200px;
       display: flex; align-items: center; justify-content: center;
     }
     .hero::before {
@@ -112,10 +112,9 @@
       color: var(--accent-light); margin-bottom: 0.6rem;
     }
     .hero h1 {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
-      font-weight: 400; line-height: 1.1; color: #fff;
-      letter-spacing: -0.02em;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 700; line-height: 1.2; color: #fff;
     }
     .hero p {
       margin-top: 0.6rem;
@@ -173,9 +172,9 @@
       border-bottom: 1px solid var(--border);
     }
     .col-header h2 {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 0.95rem; font-weight: 400;
-      letter-spacing: 0.02em; color: var(--text);
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.07em; color: var(--text);
     }
     .badge {
       font-size: 0.58rem; font-weight: 700;
@@ -220,9 +219,9 @@
     .card.hidden { display: none; }
 
     .card-name {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 0.95rem; font-weight: 400;
-      color: var(--text); letter-spacing: 0.01em;
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem; font-weight: 600;
+      color: var(--text); letter-spacing: 0.02em;
     }
 
     /* ── CARD TAGS ── */
@@ -306,7 +305,7 @@
     @media (max-width: 600px) {
       nav { padding: 0 1rem; }
       .nav-links { display: none; }
-      .hero { min-height: 220px; }
+      .hero { min-height: 160px; }
       .hero-inner { padding: 2rem 1.25rem 1.75rem; }
       .filter-bar { top: 50px; }
     }
@@ -428,18 +427,221 @@ const tagLabels = {
 };
 
 // ── SERVER DATA ───────────────────────────────────────────────────────────────
+// Fields: name, tags[], description{en,pt}, rates, site, discord, youtube
+// ─────────────────────────────────────────────────────────────────────────────
 const servers = {
-  available: [ /* ... (mantido igual ao arquivo anterior) ... */ ],
-  development: [ /* ... (mantido igual ao arquivo anterior) ... */ ],
+  available: [
+    {
+      name: "Echoes of Morroc",
+      tags: ['custom', 'pre-renewal'],
+      description: {
+        en: "A custom server based on Return to Morroc with its own spin — faster progression and content completion.",
+        pt: "Um servidor customizado baseado em Return to Morroc com sua própria abordagem — progressão mais rápida e conclusão de conteúdo."
+      },
+      rates: null,
+      site: "https://echoesofmorroc.org/",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "TrifectaRO",
+      tags: ['renewal', 'new-classes'],
+      description: {
+        en: "A rebalanced Renewal server with a thoughtful approach to 4th classes and streamlined progression.",
+        pt: "Um servidor Renewal rebalanceado com uma abordagem cuidadosa para as 4ª classes e progressão otimizada."
+      },
+      rates: null,
+      site: "https://trifectaro.com/",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "WarboundRO",
+      tags: ['custom', 'pre-renewal'],
+      description: {
+        en: "A custom client server fully re-done with new graphics and interface, including pre-renewal gameplay.",
+        pt: "Um servidor com client customizado totalmente reformulado com novos gráficos e interface, incluindo gameplay pré-renewal."
+      },
+      rates: null,
+      site: "https://warboundro.com/",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "Whispers of the Valkyries",
+      tags: ['renewal', 'custom'],
+      description: {
+        en: "A Renewal server with new skill correlations, revamped post-100 gear and content.",
+        pt: "Um servidor Renewal com novas correlações de skills, equipamentos pós-100 reformulados e novo conteúdo."
+      },
+      rates: null,
+      site: "https://whispersofthevalkyries.com/",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "Divine Ascension RO",
+      tags: ['custom', 'new-classes', 'story'],
+      description: {
+        en: "A custom server featuring a Sub-class system, a new region, new dungeons and a cinematic main story quest.",
+        pt: "Um servidor customizado com sistema de Sub-classes, nova região, novas dungeons e uma quest principal com cinemáticas."
+      },
+      rates: null,
+      site: "https://mysticprojectro.com/wiki/index.php/Main_Page",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "Card Captor RO",
+      tags: ['pre-renewal', 'card-system', 'seasonal'],
+      description: {
+        en: "A pre-renewal server built around card collecting and seasonal mechanics.",
+        pt: "Um servidor pré-renewal focado em colecionar cards e mecânicas sazonais."
+      },
+      rates: null,
+      site: "https://cc-ro.com/",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "Runerok",
+      tags: ['pre-renewal', 'custom', 'rune-system'],
+      description: {
+        en: "A pre-renewal custom server with new class identities and a Rune system replacing the traditional card system.",
+        pt: "Um servidor customizado pré-renewal com novas identidades de classes e sistema de Runas substituindo o sistema tradicional de cards."
+      },
+      rates: null,
+      site: "https://runerok.com",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "Einherjar",
+      tags: ['pre-renewal', 'custom', 'rune-system', 'new-classes'],
+      description: {
+        en: "A custom pre-renewal server featuring revamped regular classes and new job classes, with its own Rune system and a new continent.",
+        pt: "Um servidor customizado pré-renewal com classes regulares reformuladas, novas classes de job, sistema de Runas próprio e um novo continente."
+      },
+      rates: null,
+      site: "http://www.einherjaronline.com/mediawiki/index.php/Main_Page",
+      discord: null,
+      youtube: null,
+    },
+  ],
+
+  development: [
+    {
+      name: "Return to Morroc: Refuge",
+      tags: ['custom', 'new-classes', 'new-game'],
+      description: {
+        en: "A custom server built to improve RO as a whole — new world, new classes, new progression and much more.",
+        pt: "Um servidor customizado feito para melhorar o RO como um todo — novo mundo, novas classes, nova progressão e muito mais."
+      },
+      site: null,
+      discord: "https://discord.gg/a5P3PFNMhn",
+      youtube: null,
+    },
+    {
+      name: "Luna Obscura",
+      tags: ['custom', 'new-game', 'action'],
+      description: {
+        en: "A new game built in the Ragnarok engine — a mix of Bloodborne and RO with new classes, combat, progression and a brand new world.",
+        pt: "Um novo jogo construído no engine do Ragnarok — uma mistura de Bloodborne e RO com novas classes, combate, progressão e um mundo completamente novo."
+      },
+      site: "https://wiki.cathedralofblades.com/Main_Page",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "NightmareRO",
+      tags: ['custom', 'new-classes'],
+      description: {
+        en: "A custom server with new class identities, quest-based unlocks and a Nightmare dungeons system.",
+        pt: "Um servidor customizado com novas identidades de classes, desbloqueios baseados em quests e sistema de dungeons Nightmare."
+      },
+      site: null,
+      discord: "https://discord.gg/hUfZpGM8fX",
+      youtube: null,
+    },
+    {
+      name: "The Nine Worlds",
+      tags: ['custom', 'new-game', 'souls-like', 'new-classes'],
+      description: {
+        en: "A new game built in the Ragnarok engine. Features a Soul system instead of EXP (inspired by soulsborne games), new classes, a new world and rich lore.",
+        pt: "Um novo jogo construído no engine do Ragnarok. Possui sistema de Soul ao invés de EXP (inspirado em jogos soulsborne), novas classes, novo mundo e lore rico."
+      },
+      site: "https://the-nine-worlds-ro.gitbook.io/guide",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "Runebreakers",
+      tags: ['custom', 'new-game', 'roguelite'],
+      description: {
+        en: "A new game built in the Ragnarok engine with roguelite mechanics, meta-progression and floor-based gameplay.",
+        pt: "Um novo jogo construído no engine do Ragnarok com mecânicas roguelite, meta-progressão e gameplay por andares."
+      },
+      site: "https://runebreak.net/#!index.md",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "Brave Souls",
+      tags: ['custom', 'new-game', 'gacha', 'action'],
+      description: {
+        en: "A new game in the RO engine with Genshin-like design, WASD movement, and character unlocking via in-game quests or gacha — a fresh spin on the genre.",
+        pt: "Um novo jogo no engine do RO com design inspirado em Genshin, movimento WASD e desbloqueio de personagens via quests ou gacha — uma abordagem fresca no gênero."
+      },
+      site: "https://brave-soul-ro.com/#/home",
+      discord: null,
+      youtube: null,
+    },
+    {
+      name: "Edda Tales",
+      tags: ['custom', 'sandbox', 'new-classes'],
+      description: {
+        en: "A customized sandbox server with new classes, items, skills, new mobs and bosses with custom behavioral combat.",
+        pt: "Um servidor sandbox customizado com novas classes, itens, skills, novos mobs e bosses com combate comportamental customizado."
+      },
+      site: null,
+      discord: "https://discord.gg/rwGfNN3nZA",
+      youtube: null,
+    },
+    {
+      name: "Aincrad Legacy RO",
+      tags: ['custom', 'classless'],
+      description: {
+        en: "A custom Ragnarok server inspired by the MMORPG inside Sword Art Online, featuring classless combat and weapon-type progression.",
+        pt: "Um servidor Ragnarok customizado inspirado no MMORPG dentro de Sword Art Online, com combate sem classes e progressão por tipo de arma."
+      },
+      site: null,
+      discord: "https://discord.gg/gw9bCYbrmV",
+      youtube: null,
+    },
+    {
+      name: "Gearsfall",
+      tags: ['custom', 'new-game', 'economy'],
+      description: {
+        en: "A custom engine server focused on economy-driven world progression and strategic management gameplay.",
+        pt: "Um servidor com engine customizado focado em progressão mundial baseada em economia e gameplay de gerenciamento estratégico."
+      },
+      site: null,
+      discord: "https://discord.gg/wmXxjYHrqw",
+      youtube: null,
+    },
+  ],
 };
 
-// (O resto do script com multi-select está abaixo)
-
-const ICONS = { /* mantido igual */ };
+// ── ICONS ─────────────────────────────────────────────────────────────────────
+const ICONS = {
+  site:    `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  discord: `<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>`,
+  youtube: `<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`,
+};
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let currentLang   = 'en';
-let activeTags    = [];   // Array para múltiplas tags
+let activeTag     = null;   // null = show all
 
 // ── BUILD FILTER BAR ─────────────────────────────────────────────────────────
 function getAllTags() {
@@ -459,25 +661,17 @@ function renderFilterBar() {
 
   // "All" pill
   const allBtn = document.createElement('button');
-  allBtn.className = 'tag-filter' + (activeTags.length === 0 ? ' active' : '');
+  allBtn.className = 'tag-filter' + (activeTag === null ? ' active' : '');
   allBtn.textContent = t.filterAll;
-  allBtn.addEventListener('click', () => { 
-    activeTags = []; 
-    applyFilter(); 
-    renderFilterBar(); 
-  });
+  allBtn.addEventListener('click', () => { activeTag = null; applyFilter(); renderFilterBar(); });
   bar.appendChild(allBtn);
 
   getAllTags().forEach(tag => {
     const btn = document.createElement('button');
-    btn.className = 'tag-filter' + (activeTags.includes(tag) ? ' active' : '');
+    btn.className = 'tag-filter' + (activeTag === tag ? ' active' : '');
     btn.textContent = (tagLabels[tag] || {})[lang] || tag;
     btn.addEventListener('click', () => {
-      if (activeTags.includes(tag)) {
-        activeTags = activeTags.filter(t => t !== tag);
-      } else {
-        activeTags.push(tag);
-      }
+      activeTag = (activeTag === tag) ? null : tag;
       applyFilter();
       renderFilterBar();
     });
@@ -496,15 +690,13 @@ function applyFilter() {
 
     grid.querySelectorAll('.card').forEach((card, i) => {
       const s       = list[i];
-      const matches = activeTags.length === 0 || 
-                      activeTags.every(tag => s.tags.includes(tag));
-      
+      const matches = !activeTag || s.tags.includes(activeTag);
       card.classList.toggle('hidden', !matches);
       if (matches) visible++;
 
-      // highlight matching tags
+      // highlight matching tags inside the card
       card.querySelectorAll('.card-tag').forEach(t => {
-        t.classList.toggle('tag-highlighted', activeTags.includes(t.dataset.tag));
+        t.classList.toggle('tag-highlighted', activeTag && t.dataset.tag === activeTag);
       });
     });
 
@@ -517,9 +709,10 @@ function buildCard(s, isDev) {
   const card  = document.createElement('div');
   card.className = `card${isDev ? ' dev' : ''}`;
 
-  const desc = s.description[currentLang] || s.description.en;
+  const desc = typeof s.description === 'object' ? s.description[currentLang] : s.description;
   const t    = translations[currentLang];
 
+  // tags row
   const tagsHtml = s.tags
     .map(tag => `<button class="card-tag" data-tag="${tag}">${(tagLabels[tag]||{})[currentLang]||tag}</button>`)
     .join('');
@@ -541,14 +734,11 @@ function buildCard(s, isDev) {
 
   card.innerHTML = html;
 
+  // clicking a tag inside a card sets the filter
   card.querySelectorAll('.card-tag').forEach(btn => {
     btn.addEventListener('click', e => {
       const tag = btn.dataset.tag;
-      if (activeTags.includes(tag)) {
-        activeTags = activeTags.filter(t => t !== tag);
-      } else {
-        activeTags.push(tag);
-      }
+      activeTag = (activeTag === tag) ? null : tag;
       applyFilter();
       renderFilterBar();
     });
