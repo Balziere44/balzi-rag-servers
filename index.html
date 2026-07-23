@@ -251,6 +251,58 @@
     display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem;
   }
 
+  /* ── TAG FILTER DROPDOWN ── */
+  .tag-dropdown { position: relative; flex-shrink: 0; }
+  .tag-dropdown-btn {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-family: inherit; font-size: 0.63rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.30rem 0.7rem; border-radius: 9999px;
+    border: 1px solid var(--border-strong);
+    background: transparent; color: var(--text-dim);
+    cursor: pointer; transition: all 0.14s;
+  }
+  .tag-dropdown-btn:hover { border-color: var(--accent-border); color: var(--text); }
+  .tag-dropdown-btn.open { background: var(--accent-dim); border-color: var(--accent-border); color: var(--accent); }
+  .tag-dropdown-btn svg { width: 11px; height: 11px; transition: transform 0.18s; flex-shrink: 0; }
+  .tag-dropdown-btn.open svg { transform: rotate(180deg); }
+  .tag-dropdown-count {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 15px; height: 15px; padding: 0 0.25rem;
+    border-radius: 9999px; background: var(--accent); color: var(--black);
+    font-size: 0.58rem; font-weight: 800;
+  }
+
+  .tag-dropdown-panel {
+    position: absolute; top: calc(100% + 0.5rem); left: 0;
+    z-index: 150;
+    background: var(--surface); border: 1px solid var(--border-strong);
+    border-radius: 8px; box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+    padding: 0.85rem;
+    width: min(420px, 84vw);
+    display: none;
+    max-height: 60vh; overflow-y: auto;
+  }
+  .tag-dropdown-panel.open { display: block; }
+  .tag-dropdown-grid {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .tag-dropdown-clear {
+    width: 100%; text-align: left;
+    font-family: inherit; font-size: 0.63rem; font-weight: 700;
+    color: var(--text-muted); background: none; border: none;
+    cursor: pointer; text-decoration: underline;
+    padding: 0 0 0.6rem; margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .tag-dropdown-clear:hover { color: var(--text); }
+
+  /* Active-tag pills shown inline in the bar once selected */
+  .active-tags-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem;
+    min-width: 0;
+  }
+
   /* Search input */
   .search-wrap {
     display: flex; align-items: center; gap: 0.4rem;
@@ -457,6 +509,18 @@
   }
   .nav-discord-btn:hover { background: var(--accent-dim); border-color: var(--accent); }
 
+  /* ── NAV SOCIAL ICONS (YouTube, Twitch) ── */
+  .nav-social-icons { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
+  .nav-icon-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px;
+    color: rgba(255,255,251,0.45); background: transparent;
+    border: 1px solid rgba(255,255,251,0.12);
+    border-radius: 4px;
+    transition: all 0.16s;
+  }
+  .nav-icon-btn:hover { color: var(--text); border-color: rgba(255,255,251,0.30); background: rgba(255,255,251,0.05); }
+
   /* ── THEME TOGGLE ── */
   .theme-toggle-btn {
     background: transparent;
@@ -477,11 +541,16 @@
     .filter-bar { top: 52px; padding: 0.55rem 1.25rem; }
   }
   @media (max-width: 600px) {
-    nav { padding: 0 1rem; }
+    nav { padding: 0 1rem; gap: 0.5rem; }
     .nav-links { display: none; }
     .hero { min-height: 200px; }
     .hero-inner { padding: 2rem 1.25rem; }
     .search-wrap input { width: 110px; }
+    .nav-right { gap: 0.5rem; }
+    .nav-discord-btn span.discord-label { display: none; }
+    .nav-discord-btn { padding: 0.28rem 0.4rem; }
+
+    .tag-dropdown-panel { left: auto; right: 0; width: min(340px, 90vw); }
   }
 
 </style>
@@ -505,8 +574,16 @@
       </button>
     <a class="nav-discord-btn" href="https://discord.gg/uNGtXmyQ8M" target="_blank" rel="noopener" title="Join our Discord" aria-label="Join our Discord community">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-        Discord
+        <span class="discord-label">Discord</span>
       </a>
+    <div class="nav-social-icons">
+      <a class="nav-icon-btn" href="https://www.youtube.com/@Balziere" target="_blank" rel="noopener" title="YouTube" aria-label="Balziere on YouTube">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a class="nav-icon-btn" href="https://www.twitch.tv/balziere" target="_blank" rel="noopener" title="Twitch" aria-label="Balziere on Twitch">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0Zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+      </a>
+    </div>
     <div class="lang-switcher" id="lang-switcher" role="group" aria-label="Language">
       <div class="lang-btn active" data-lang="en" title="English"    role="button" tabindex="0">🇺🇸</div>
       <div class="lang-btn"        data-lang="pt" title="Português"  role="button" tabindex="0">🇧🇷</div>
@@ -528,7 +605,7 @@
 
 <div class="filter-bar" id="filter-bar" role="search" aria-label="Filter servers">
   <div class="filter-row" id="filter-row-main">
-    <!-- search input and tag pills injected here by JS -->
+    <!-- search input, tag dropdown button + panel, and active-tag pills injected here by JS -->
   </div>
   <div class="filter-summary hidden" id="filter-summary" aria-live="polite">
     <span id="filter-summary-text"></span>
@@ -633,6 +710,10 @@ const tagLabels = {
   'story':       { en: 'Story',         pt: 'Narrativa'        },
   'classless':   { en: 'Classless',     pt: 'Sem Classe'       },
   'card-system': { en: 'Card System',   pt: 'Sistema de Cards' },
+  'wasd':        { en: 'WASD Movement', pt: 'Movimento WASD'   },
+  'steampunk':   { en: 'Steampunk',     pt: 'Steampunk'        },
+  'permadeath':  { en: 'Permadeath',    pt: 'Morte Permanente' },
+  'no-multiclient': { en: 'No Multi-Client', pt: 'Sem Multi-Client' },
 };
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -647,28 +728,28 @@ const servers = {
   available: [
     {
       name: "Echoes of Morroc",
-      tags: ['custom', 'pre-renewal'],
+      tags: ['custom', 'pre-renewal', 'story'],
       description: {
-        en: "A custom server based on Return to Morroc with its own spin — faster progression and content completion.",
-        pt: "Um servidor customizado baseado em Return to Morroc com sua própria abordagem — progressão mais rápida e conclusão de conteúdo.",
+        en: "A heavily customized server based on Return to Morroc (4x rates) — skill-based combat with combos and rotations, a Shadow System on death, and seasonal resets called Paradox. No pay-to-win.",
+        pt: "Um servidor fortemente customizado baseado em Return to Morroc (rates 4x) — combate baseado em skills com combos e rotações, Shadow System ao morrer, e resets sazonais chamados Paradox. Sem pay-to-win.",
       },
-      rates: null, site: "https://echoesofmorroc.org/", discord: null, youtube: null,
+      rates: "4x/4x", site: "https://echoesofmorroc.org/", discord: null, youtube: null,
     },
     {
       name: "TrifectaRO",
       tags: ['renewal', 'new-classes'],
       description: {
-        en: "A rebalanced Renewal server with a thoughtful approach to 4th classes and streamlined progression.",
-        pt: "Um servidor Renewal rebalanceado com uma abordagem cuidadosa para as 4ª classes e progressão otimizada.",
+        en: "A rebalanced Renewal server (50x) with reworked skills, a custom Dark Knight class, an Enchant Upgrader, and Blessed Ore so refining never breaks your gear.",
+        pt: "Um servidor Renewal rebalanceado (50x) com skills reformuladas, classe customizada Dark Knight, Enchant Upgrader e Blessed Ore para refinar sem quebrar o equipamento.",
       },
-      rates: null, site: "https://trifectaro.com/", discord: null, youtube: null,
+      rates: "50x", site: "https://trifectaro.com/", discord: null, youtube: null,
     },
     {
       name: "WarboundRO",
-      tags: ['custom', 'pre-renewal'],
+      tags: ['custom', 'pre-renewal', 'wasd'],
       description: {
-        en: "A custom client server fully re-done with new graphics and interface, including pre-renewal gameplay.",
-        pt: "Um servidor com client customizado totalmente reformulado com novos gráficos e interface, incluindo gameplay pré-renewal.",
+        en: "A pre-renewal server on a fully custom game engine — move and fight entirely with WASD and hotkeys, no click-to-move required, with enhanced weather, lighting and a custom netcode.",
+        pt: "Um servidor pré-renewal com engine totalmente customizado — mova-se e lute inteiramente com WASD e atalhos, sem precisar clicar para andar, com clima e iluminação aprimorados e rede própria.",
       },
       rates: null, site: "https://warboundro.com/", discord: null, youtube: null,
     },
@@ -676,35 +757,35 @@ const servers = {
       name: "Whispers of the Valkyries",
       tags: ['renewal', 'custom'],
       description: {
-        en: "A Renewal server with new skill correlations, revamped post-100 gear and content.",
-        pt: "Um servidor Renewal com novas correlações de skills, equipamentos pós-100 reformulados e novo conteúdo.",
+        en: "A lore-driven Renewal server (5x/5x/2x) with a Valor and Relic system, a waypoint network for dungeons, and a refine system that's 100% success at a material cost.",
+        pt: "Um servidor Renewal (5x/5x/2x) com lore própria, sistema de Valor e Relíquias, rede de waypoints para dungeons, e refino 100% de sucesso com custo de materiais.",
       },
-      rates: null, site: "https://whispersofthevalkyries.com/", discord: null, youtube: null,
+      rates: "5x/5x/2x", site: "https://whispersofthevalkyries.com/", discord: null, youtube: null,
     },
     {
       name: "Divine Ascension RO",
       tags: ['custom', 'new-classes', 'story'],
       description: {
-        en: "A custom server featuring a Sub-class system, a new region, new dungeons and a cinematic main story quest.",
-        pt: "Um servidor customizado com sistema de Sub-classes, nova região, novas dungeons e uma quest principal com cinemáticas.",
+        en: "A custom server built on renewal content adapted to pre-renewal (15x/20x, no 3rd jobs), with Multi-Class Specializations, Nightmare Dungeons, WoE Domination and an entirely new continent.",
+        pt: "Um servidor customizado com conteúdo renewal adaptado para pré-renewal (15x/20x, sem 3ª classe), com Especializações Multi-Classe, Nightmare Dungeons, WoE Domination e um continente totalmente novo.",
       },
-      rates: null, site: "https://mysticprojectro.com/wiki/index.php/Main_Page", discord: null, youtube: null,
+      rates: "15x/20x", site: "https://mysticprojectro.com/wiki/index.php/Main_Page", discord: null, youtube: null,
     },
     {
       name: "Card Captor RO",
-      tags: ['pre-renewal', 'card-system', 'seasonal'],
+      tags: ['pre-renewal', 'card-system', 'seasonal', 'no-multiclient'],
       description: {
-        en: "A pre-renewal server built around card collecting and seasonal mechanics.",
-        pt: "Um servidor pré-renewal focado em colecionar cards e mecânicas sazonais.",
+        en: "A pre-renewal server (5x/5x/5x) where every card grants a permanent account bonus on first pickup. PvE-focused with a 3-month seasonal reset and no multi-client, protected by Gepard Shield.",
+        pt: "Um servidor pré-renewal (5x/5x/5x) onde cada card dá um bônus permanente de conta ao ser coletado pela primeira vez. Foco em PvE, reset sazonal a cada 3 meses e sem multi-client, protegido por Gepard Shield.",
       },
-      rates: null, site: "https://cc-ro.com/", discord: null, youtube: null,
+      rates: "5x/5x/5x", site: "https://cc-ro.com/", discord: null, youtube: null,
     },
     {
       name: "Runerok",
       tags: ['pre-renewal', 'custom', 'rune-system'],
       description: {
-        en: "A pre-renewal custom server with new class identities and a Rune system replacing the traditional card system.",
-        pt: "Um servidor customizado pré-renewal com novas identidades de classes e sistema de Runas substituindo o sistema tradicional de cards.",
+        en: "A low-rate, PvE-focused pre-renewal server that replaces the card system with Runes, keeps the classic 6 base classes reworked, and skips WoE for a slower, classic-paced leveling experience.",
+        pt: "Um servidor pré-renewal low-rate focado em PvE que substitui o sistema de cards por Runas, mantém as 6 classes base clássicas reformuladas, e não tem WoE, priorizando uma progressão mais lenta e clássica.",
       },
       rates: null, site: "https://runerok.com", discord: null, youtube: null,
     },
@@ -712,8 +793,8 @@ const servers = {
       name: "Einherjar",
       tags: ['pre-renewal', 'custom', 'rune-system', 'new-classes'],
       description: {
-        en: "A custom pre-renewal server featuring revamped regular classes and new job classes, with its own Rune system and a new continent.",
-        pt: "Um servidor customizado pré-renewal com classes regulares reformuladas, novas classes de job, sistema de Runas próprio e um novo continente.",
+        en: "A pre-renewal server (floating 3x–9x rates) with 11 custom endgame classes like Necromancer and Buccaneer, its own Rune system, Weapon Mastery, Enchanting and Bounty Boards.",
+        pt: "Um servidor pré-renewal (rates flutuantes de 3x a 9x) com 11 classes customizadas endgame como Necromancer e Buccaneer, sistema de Runas próprio, Weapon Mastery, Enchanting e Bounty Boards.",
       },
       rates: null, site: "http://www.einherjaronline.com/mediawiki/index.php/Main_Page", discord: null, youtube: null,
     },
@@ -732,8 +813,8 @@ const servers = {
       name: "Luna Obscura",
       tags: ['custom', 'new-game', 'action'],
       description: {
-        en: "A new game built in the RO engine — a mix of Bloodborne and RO with new classes, combat, progression and a brand new world.",
-        pt: "Um novo jogo construído no engine do RO — uma mistura de Bloodborne e RO com novas classes, combate, progressão e um mundo completamente novo.",
+        en: "A solo-developed passion project reimagining RO as an action RPG in a dark Victorian world inspired by Bloodborne and Castlevania — no pay-to-win, no release date, just a labor of love.",
+        pt: "Um projeto solo apaixonado que reimagina o RO como uma action RPG num mundo vitoriano sombrio inspirado em Bloodborne e Castlevania — sem pay-to-win, sem data de lançamento, só dedicação.",
       },
       site: "https://wiki.cathedralofblades.com/Main_Page", discord: null, youtube: null,
     },
@@ -748,10 +829,10 @@ const servers = {
     },
     {
       name: "The Nine Worlds",
-      tags: ['custom', 'new-game', 'souls-like', 'new-classes'],
+      tags: ['custom', 'new-game', 'souls-like', 'new-classes', 'permadeath'],
       description: {
-        en: "A new game built in the RO engine. Features a Soul system instead of EXP (inspired by soulsborne games), new classes, a new world and rich lore.",
-        pt: "Um novo jogo construído no engine do RO. Possui sistema de Soul ao invés de EXP (inspirado em jogos soulsborne), novas classes, novo mundo e lore rico.",
+        en: "A new game in the RO engine with no Job EXP from monsters — you progress by offering Souls instead, and permanently lose them on death. Bloodline systems and shrine trials shape a heavy, lore-rich world.",
+        pt: "Um novo jogo no engine do RO sem EXP de Job por monstro — o progresso vem de oferecer Almas, que se perdem permanentemente ao morrer. Sistemas de linhagem e provações em santuários moldam um mundo denso e rico em lore.",
       },
       site: "https://the-nine-worlds-ro.gitbook.io/guide", discord: null, youtube: null,
     },
@@ -766,7 +847,7 @@ const servers = {
     },
     {
       name: "Brave Souls",
-      tags: ['custom', 'new-game', 'gacha', 'action'],
+      tags: ['custom', 'new-game', 'gacha', 'action', 'wasd'],
       description: {
         en: "A new game in the RO engine with Genshin-like design, WASD movement, and character unlocking via in-game quests or gacha.",
         pt: "Um novo jogo no engine do RO com design inspirado em Genshin, movimento WASD e desbloqueio de personagens via quests ou gacha.",
@@ -784,19 +865,19 @@ const servers = {
     },
     {
       name: "Aincrad Legacy RO",
-      tags: ['custom', 'classless'],
+      tags: ['custom', 'classless', 'economy'],
       description: {
-        en: "A custom RO server inspired by the MMORPG inside Sword Art Online, featuring classless combat and weapon-type progression.",
-        pt: "Um servidor RO customizado inspirado no MMORPG dentro de Sword Art Online, com combate sem classes e progressão por tipo de arma.",
+        en: "A custom RO server inspired by the MMORPG inside Sword Art Online, with a 100% original storyline, 129 archetype variants, classless weapon-based progression, and an economy where zeny only comes from mobs or trading — no vending alts.",
+        pt: "Um servidor RO customizado inspirado no MMORPG dentro de Sword Art Online, com história 100% original, 129 variantes de arquétipos, progressão sem classes por tipo de arma, e uma economia onde zeny só vem de mobs ou trocas — sem alts de vending.",
       },
       site: null, discord: "https://discord.gg/gw9bCYbrmV", youtube: null,
     },
     {
       name: "Gearsfall",
-      tags: ['custom', 'new-game', 'economy'],
+      tags: ['custom', 'new-game', 'economy', 'steampunk'],
       description: {
-        en: "A custom engine server focused on economy-driven world progression and strategic management gameplay.",
-        pt: "Um servidor com engine customizado focado em progressão mundial baseada em economia e gameplay de gerenciamento estratégico.",
+        en: "A custom engine server set in an Industrial Revolution era with a Steampunk aesthetic and an original narrative — build, fight and explore a world where science and magic collide, and progress has a price.",
+        pt: "Um servidor com engine customizado ambientado numa era de Revolução Industrial com estética Steampunk e narrativa original — construa, lute e explore um mundo onde ciência e magia colidem, e o progresso tem um preço.",
       },
       site: null, discord: "https://discord.gg/wmXxjYHrqw", youtube: null,
     },
@@ -860,7 +941,9 @@ function getCount(sectionKey) {
   return { total, visible };
 }
 
-// ── Render filter bar (search + pills)
+// ── Render filter bar (search + tag dropdown + active pills)
+let tagDropdownOpen = false; // dropdown collapse state — closed by default
+
 function renderFilterBar() {
   const t    = translations[currentLang];
   const row  = document.getElementById('filter-row-main');
@@ -889,35 +972,86 @@ function renderFilterBar() {
   div.className = 'filter-divider'; div.setAttribute('aria-hidden','true');
   row.appendChild(div);
 
-  // Label
-  const lbl = document.createElement('span');
-  lbl.className = 'filter-label'; lbl.textContent = t.filterLabel;
-  row.appendChild(lbl);
+  // ── Tag dropdown (button + popover panel) ──
+  const dropdown = document.createElement('div');
+  dropdown.className = 'tag-dropdown';
 
-  // "All" pill
-  const allBtn = document.createElement('button');
-  allBtn.className = 'tag-filter' + (activeTags.size === 0 ? ' active' : '');
-  allBtn.textContent = t.filterAll;
-  allBtn.setAttribute('aria-pressed', activeTags.size === 0 ? 'true' : 'false');
-  allBtn.addEventListener('click', () => {
-    activeTags.clear(); searchQuery = ''; syncURL();
+  const activeCount = activeTags.size;
+  const toggleBtn = document.createElement('button');
+  toggleBtn.type = 'button';
+  toggleBtn.className = 'tag-dropdown-btn' + (tagDropdownOpen ? ' open' : '');
+  toggleBtn.setAttribute('aria-expanded', tagDropdownOpen ? 'true' : 'false');
+  toggleBtn.setAttribute('aria-haspopup', 'true');
+  toggleBtn.innerHTML = `${t.filterLabel}${activeCount > 0 ? ` <span class="tag-dropdown-count">${activeCount}</span>` : ''} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    tagDropdownOpen = !tagDropdownOpen;
+    renderFilterBar();
+  });
+  dropdown.appendChild(toggleBtn);
+
+  const panel = document.createElement('div');
+  panel.className = 'tag-dropdown-panel' + (tagDropdownOpen ? ' open' : '');
+
+  const clearBtn = document.createElement('button');
+  clearBtn.type = 'button';
+  clearBtn.className = 'tag-dropdown-clear';
+  clearBtn.textContent = t.filterAll + ' / ' + t.clearAll;
+  clearBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    activeTags.clear(); syncURL();
     applyFilter(); renderFilterBar(); renderFilterSummary();
   });
-  row.appendChild(allBtn);
+  panel.appendChild(clearBtn);
 
-  // Tag pills
+  const grid = document.createElement('div');
+  grid.className = 'tag-dropdown-grid';
   getAllTags().forEach(tag => {
     const btn = document.createElement('button');
+    btn.type = 'button';
     btn.className = 'tag-filter' + (activeTags.has(tag) ? ' active' : '');
     btn.textContent = (tagLabels[tag] || {})[currentLang] || tag;
     btn.setAttribute('aria-pressed', activeTags.has(tag) ? 'true' : 'false');
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
       activeTags.has(tag) ? activeTags.delete(tag) : activeTags.add(tag);
       syncURL(); applyFilter(); renderFilterBar(); renderFilterSummary();
     });
-    row.appendChild(btn);
+    grid.appendChild(btn);
   });
+  panel.appendChild(grid);
+
+  dropdown.appendChild(panel);
+  row.appendChild(dropdown);
+
+  // ── Active tag pills shown inline (only the ones currently selected) ──
+  if (activeCount > 0) {
+    const activeRow = document.createElement('div');
+    activeRow.className = 'active-tags-row';
+    [...activeTags].forEach(tag => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'tag-filter active';
+      btn.textContent = (tagLabels[tag] || {})[currentLang] || tag;
+      btn.setAttribute('aria-pressed', 'true');
+      btn.title = t.clearAll;
+      btn.addEventListener('click', () => {
+        activeTags.delete(tag);
+        syncURL(); applyFilter(); renderFilterBar(); renderFilterSummary();
+      });
+      activeRow.appendChild(btn);
+    });
+    row.appendChild(activeRow);
+  }
 }
+
+// Close the tag dropdown when clicking outside it
+document.addEventListener('click', (e) => {
+  if (tagDropdownOpen && !e.target.closest('.tag-dropdown')) {
+    tagDropdownOpen = false;
+    renderFilterBar();
+  }
+});
 
 // ── Render filter summary row (shown only when filters are active)
 function renderFilterSummary() {
